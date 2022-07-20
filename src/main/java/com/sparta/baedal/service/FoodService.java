@@ -1,7 +1,7 @@
 package com.sparta.baedal.service;
 
 import com.sparta.baedal.dto.FoodRequestDto;
-import com.sparta.baedal.dto.RestaurantRequestDto;
+import com.sparta.baedal.dto.FoodResponseDto;
 import com.sparta.baedal.model.Food;
 import com.sparta.baedal.model.Restaurant;
 import com.sparta.baedal.repository.FoodRepository;
@@ -21,16 +21,14 @@ public class FoodService {
     private final FoodRepository foodRepository;
 
     @Transactional
-    public void createFood(List<FoodRequestDto> foodRequestDto, Long retaurantId) {
+    public void createFood(List<FoodRequestDto> foodRequestDto, Long restaurantId) {
         List<Food> foods = new ArrayList<>();
-        Restaurant restaurant = restaurantRepository.findById(retaurantId).get();
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
         for (int i = 0; i < foodRequestDto.size(); i++) {
             int price = foodRequestDto.get(i).getPrice();
             String name = foodRequestDto.get(i).getName();
-            if (price >= 100 || price <= 1000000) {
-                System.out.println("price : " + price + " name : " + name);
+            if (price >= 100 && price <= 1000000) {
                 if (price % 100 == 0) {
-                    System.out.println("price : " + price + " name : " + name);
                 } else {
                     throw new IllegalArgumentException("100원 단위 적어주삼");
                 }
@@ -46,6 +44,19 @@ public class FoodService {
             foods.add(food);
         }
         foodRepository.saveAll(foods);
+    }
+
+    public List<FoodResponseDto> getFood(Long restaurantId){
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
+        List<FoodResponseDto> foodResponseDtoList = new ArrayList<>();
+        List<Food> foodList = foodRepository.findAllByRestaurant(restaurant);
+
+        for(Food food : foodList){
+            FoodResponseDto foodResponseDto = new FoodResponseDto(food);
+            foodResponseDtoList.add(foodResponseDto);
+        }
+        return foodResponseDtoList;
+
     }
 
 }
