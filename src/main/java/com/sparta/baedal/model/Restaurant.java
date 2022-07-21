@@ -4,8 +4,6 @@ import com.sparta.baedal.dto.RestaurantRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
 import javax.persistence.*;
 
 @Getter

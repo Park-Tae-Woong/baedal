@@ -18,9 +18,8 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @PostMapping("/api/restaurant/register")
-    public Restaurant createRestaurant(@RequestBody RestaurantRequestDto restaurantRequestDto) {
-        Restaurant restaurants = restaurantService.createRestaurant(restaurantRequestDto);
-        return restaurants;
+    public void createRestaurant(@RequestBody RestaurantRequestDto restaurantRequestDto) {
+        restaurantService.createRestaurant(restaurantRequestDto);
     }
 
     @GetMapping("/api/restaurants")

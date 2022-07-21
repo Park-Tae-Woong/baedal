@@ -1,6 +1,5 @@
 package com.sparta.baedal.model;
 
-import com.sparta.baedal.dto.FoodRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,7 @@ import javax.persistence.*;
 @Entity
 public class Food {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

@@ -47,9 +47,8 @@ public class FoodService {
     }
 
     public List<FoodResponseDto> getFood(Long restaurantId){
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
         List<FoodResponseDto> foodResponseDtoList = new ArrayList<>();
-        List<Food> foodList = foodRepository.findAllByRestaurant(restaurant);
+        List<Food> foodList = foodRepository.findAllByRestaurantId(restaurantId);
 
         for(Food food : foodList){
             FoodResponseDto foodResponseDto = new FoodResponseDto(food);
